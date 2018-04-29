@@ -13,14 +13,22 @@ use App\Message;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     $messages = Message::with('user')->latest()->get();
 
+    $messageCount = $messages->count();
+
     $messages = $messages->toJson();
 
-    return view('welcome', compact('messages'));
+    return view('welcome', compact('messages', 'messageCount'));
 });
 
-Auth::routes();
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/messages', 'MessageController@index');
+Route::post('/messages', 'MessageController@store');

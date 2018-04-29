@@ -23,6 +23,7 @@
             color: #636b6f;
             font-family: 'Work Sans', sans-serif;
             font-weight: 100;
+            margin-bottom: 20px;
         }
 
         .message {
@@ -32,29 +33,34 @@
 </head>
 
 <body class="bg-white">
+    <div id="app">
     @include('layouts/nav')
+    @include('layouts/login')
     @include('layouts/tools')
 
-    <div id="app">
 
-        <div class="flex mt-8 justify-center border-t border-grey-light py-4">
-            <add-message></add-message>
+        <div class="flex mt-8 pt-4 justify-center items-center border-t border-grey-light">
+            <div class="inline-flex bg-blue w-2 h-2 rounded full mr-2 shadow"></div>
+            <div class="mr-4 text-sm">SFC-MS</div>
+
+            <div class="inline-flex bg-green w-2 h-2 rounded full mr-2 shadow"></div>
+            <div class="mr-4 text-sm">NMR 300</div>
+
+            <div class="inline-flex bg-red w-2 h-2 rounded full mr-2 shadow"></div>
+            <div class="mr-4 text-sm">NMR 500</div>
+
+            <div class="inline-flex bg-orange w-2 h-2 rounded full mr-2 shadow"></div>
+            <div class="mr-4 text-sm">NMR 600</div>
         </div>
 
-        <div class="flex mt-2 justify-center">
-            <div class="w-full text-center">
-                <div class="bg-white h-auto rounded shadow py-4 max-w-lg mx-auto px-8">
-                    <p class="font-thin mb-8">Message log of <span class="font-medium">Friday 24 April</span></p>
+        <message-list :data="{{ $messages }}" auth="{{ Auth::check() }}"></message-list>
 
-                    <message-list :messages="{{ $messages }}"></message-list>
 
-                </div>
-            </div>
-        </div>
+
 
     </div>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js "></script>
 </body>
 
 </html>

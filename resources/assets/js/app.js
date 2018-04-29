@@ -16,6 +16,7 @@ window.Vue = require("vue");
 
 Vue.component("add-message", require("./components/AddMessage.vue"));
 Vue.component("message-list", require("./components/MessageList.vue"));
+Vue.component("auth-buttons", require("./components/AuthButtons.vue"));
 
 const app = new Vue({
   el: "#app"
