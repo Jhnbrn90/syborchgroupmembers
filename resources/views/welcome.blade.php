@@ -36,8 +36,8 @@
     <div id="app">
     @include('layouts/nav')
     @include('layouts/login')
+    @include('layouts/register')
     @include('layouts/tools')
-
 
         <div class="flex mt-8 pt-4 justify-center items-center border-t border-grey-light">
             <div class="inline-flex bg-blue w-2 h-2 rounded full mr-2 shadow"></div>
@@ -55,12 +55,9 @@
 
         <message-list :data="{{ $messages }}" auth="{{ Auth::check() }}"></message-list>
 
-
-
-
     </div>
 
-    <script src="js/app.js "></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

@@ -9,7 +9,7 @@
 
         <div class="w-1/4 text-right mr-8">
             @auth
-            <span class="tracking-wide">Hi there, <span class="font-medium text-blue-dark">{{ ucfirst(auth()->user()->name) }}</span>!
+            <span class="tracking-wide">Hi there, <span class="font-medium text-blue-dark">{{ ucfirst(auth()->user()->firstname) }}</span>!
             </span> <br><a class="no-underline text-grey hover:text-red-light" href="/logout">(log out)</a> @else
             <auth-buttons></auth-buttons> @endauth
         </div>

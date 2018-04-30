@@ -15,6 +15,8 @@ use App\Message;
 
 Auth::routes();
 
+Route::post('/newregister', 'StudentController@store')->name('register-student');
+
 Route::get('/', function () {
     $messages = Message::with('user')->latest()->get();
 

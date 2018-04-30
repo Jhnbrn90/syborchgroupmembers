@@ -6,7 +6,7 @@
 
   <div class="flex justify-center py-4 mt-2" v-else>
     <p class="text-grey">
-      <a href="/login" class="font-medium text-blue-light no-underline hover:text-grey-dark tracking-wide">Log in</a> to leave a message.
+      <button @click="login" class="font-medium text-blue-light no-underline hover:text-grey-dark tracking-wide">Log in</button> to leave a message.
     </p>
   </div>
 
@@ -24,7 +24,7 @@
 
         <div class="message bg-white shadow-md border-t border-grey-lightest rounded py-4" v-for="message in messages">
           <div class="flex px-4 justify-center">
-            <p class="font-normal text-lg mr-2 text-blue-dark">{{ message.user.name }}</p>
+            <p class="font-normal text-lg mr-2 text-blue-dark">{{ message.user.firstname }}</p>
           </div>
             <p class="font-thin text-xs text-grey-dark mb-2">({{ message.created_at | ago }})</p>
             <p class="text-black font-normal">{{ message.body }}</p>
@@ -62,6 +62,10 @@ export default {
   },
 
   methods: {
+    login() {
+      document.querySelector("#login-modal").style.display = "flex";
+    },
+
     addMessage(message) {
       this.messages.unshift(message);
       this.messageCount += 1;
