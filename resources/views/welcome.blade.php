@@ -29,6 +29,10 @@
         .message {
             margin-bottom: 35px;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -39,7 +43,7 @@
     @include('layouts/register')
     @include('layouts/tools')
 
-        <status-list></status-list>
+        <status-list :data="{{ $machines }}" auth="{{ Auth::check() }}"></status-list>
 
         <message-list :data="{{ $messages }}" auth="{{ Auth::check() }}"></message-list>
 

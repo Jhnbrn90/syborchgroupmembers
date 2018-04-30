@@ -35529,6 +35529,18 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -35568,16 +35580,92 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["auth", "data"],
+
   data: function data() {
     return {
-      SFC: true
+      form: {
+        status: "",
+        machine: ""
+      },
+
+      machines: this.data,
+
+      lookup: {
+        "SFC-MS": "SFC-MS",
+        NMR300: "NMR 300",
+        NMR500: "NMR 500",
+        NMR600: "NMR 600",
+        available: "bg-green",
+        running: "bg-blue",
+        maintenance: "bg-orange",
+        "out-of-order": "bg-red"
+      },
+
+      modalOpen: {
+        "SFC-MS": false,
+        NMR300: false,
+        NMR500: false,
+        NMR600: false
+      }
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    window.Echo.channel("status-updates").listen("StatusUpdated", function (e) {
+      _this.machines[Object.keys(e.status)[0]] = e.status[Object.keys(e.status)[0]];
+    });
   },
 
 
   methods: {
-    openModal: function openModal() {
-      document.querySelector("#SFC-modal").style.display = "flex";
+    onSubmit: function onSubmit() {
+      var _this2 = this;
+
+      axios.post("/status", {
+        machine: this.form.machine,
+        status: this.form.status
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        _this2.machines[_this2.form.machine] = data;
+        document.getElementById(_this2.form.machine).classList.add("hidden");
+        _this2.modalOpen[_this2.form.machine] = false;
+      });
+    },
+    indicatorClass: function indicatorClass(machine) {
+      return this.lookup[this.machines[machine]["status"]];
+    },
+    toggleModal: function toggleModal(machine) {
+      var _this3 = this;
+
+      // if the modal was already open, close it
+      if (this.modalOpen[machine]) {
+        document.getElementById(machine).classList.add("hidden");
+        this.modalOpen[machine] = false;
+        this.form.machine = "";
+        this.form.status = "";
+      } else {
+        // if the modal was not yet open
+        // 1. close all other modals
+        Object.entries(this.modalOpen).forEach(function (_ref2) {
+          var _ref3 = _slicedToArray(_ref2, 2),
+              key = _ref3[0],
+              value = _ref3[1];
+
+          if (key !== machine) {
+            _this3.modalOpen[machine] = false;
+            document.getElementById(key).classList.add("hidden");
+          }
+        });
+
+        // 2. open the modal of choice
+        document.getElementById(machine).classList.remove("hidden");
+        this.form.machine = machine;
+        this.form.status = "";
+        this.modalOpen[machine] = true;
+      }
     }
   }
 });
@@ -35590,120 +35678,231 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass:
-          "flex py-4 mt-8 pt-4 justify-center items-center border-t border-grey-light shadow-md"
-      },
-      [
-        _c("div", {
-          staticClass: "inline-flex bg-blue w-2 h-2 rounded full mr-2 shadow"
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "mr-4 text-sm" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "text-grey-dark hover:cursor-pointer hover:underline",
-              on: { click: _vm.openModal }
-            },
-            [_vm._v("SFC-MS")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "inline-flex bg-green w-2 h-2 rounded full mr-2 shadow"
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "mr-4 text-sm" }, [_vm._v("NMR 300")]),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "inline-flex bg-red w-2 h-2 rounded full mr-2 shadow"
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "mr-4 text-sm" }, [_vm._v("NMR 500")]),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "inline-flex bg-orange w-2 h-2 rounded full mr-2 shadow"
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "mr-4 text-sm" }, [_vm._v("NMR 600")])
-      ]
-    ),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "flex justify-center items-center mt-4",
-        staticStyle: { display: "none" },
-        attrs: { id: "SFC-modal" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "p-4 w-auto h-auto shadow-md rounded text-center" },
-          [
-            _c(
-              "h4",
-              {
-                staticClass:
-                  "text-grey-dark font-medium tracking-wide text-lg mb-2"
-              },
-              [_vm._v("SFC-MS")]
-            ),
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "flex py-4 mt-8 pt-4 justify-center items-center border-t border-grey-light shadow-md"
+        },
+        _vm._l(Object.keys(_vm.machines), function(machine) {
+          return _c("div", [
+            _c("div", {
+              staticClass: "inline-flex w-2 h-2 rounded full mr-px shadow",
+              class: _vm.indicatorClass(machine)
+            }),
             _vm._v(" "),
-            _c("span", { staticClass: "mb-2" }, [
-              _vm._v("Used by "),
-              _c("span", { staticClass: "font-medium" }, [_vm._v("John")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex-inline mb-4 mt-2" }, [
-              _c("span", { staticClass: "mr-2" }, [_vm._v("Current status:")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                { staticClass: "shadow", attrs: { name: "status" } },
-                [
-                  _c("option", { attrs: { value: "running" } }, [
-                    _vm._v("Running")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "available" } }, [
-                    _vm._v("Available")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "maintenance" } }, [
-                    _vm._v("Maintenance")
+            _c("div", { staticClass: "inline-flex mr-4 text-sm" }, [
+              _vm.auth
+                ? _c("div", [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "text-grey-dark hover:cursor-pointer hover:underline",
+                        on: {
+                          click: function($event) {
+                            _vm.toggleModal(machine)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.lookup[machine]) +
+                            "\n              "
+                        )
+                      ]
+                    )
                   ])
+                : _c("div", [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.lookup[machine]) +
+                        "\n            "
+                    )
+                  ])
+            ])
+          ])
+        })
+      ),
+      _vm._v(" "),
+      _vm._l(Object.keys(_vm.machines), function(machine) {
+        return _c("div", [
+          _c(
+            "div",
+            {
+              staticClass: "flex justify-center items-center mt-4 hidden",
+              attrs: { id: machine }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-4 w-full h-auto shadow-md text-center border border-grey"
+                },
+                [
+                  _c(
+                    "form",
+                    {
+                      attrs: { action: "/status" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.onSubmit($event)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "h4",
+                        {
+                          staticClass:
+                            "text-blue-dark underline font-medium text-lg mb-2"
+                        },
+                        [_vm._v(_vm._s(machine))]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "mb-2" }, [
+                        _vm._v("Used by "),
+                        _c("span", { staticClass: "font-medium" }, [
+                          _vm._v(
+                            _vm._s(_vm.machines[machine]["user"]) +
+                              " (" +
+                              _vm._s(_vm.machines[machine]["time"]) +
+                              ")"
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex-inline mb-4 mt-2" }, [
+                        _c("span", { staticClass: "mr-2" }, [
+                          _vm._v("Current status:")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.status,
+                                expression: "form.status"
+                              }
+                            ],
+                            staticClass: "shadow",
+                            attrs: { name: "status" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "status",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "", disabled: "" } },
+                              [_vm._v("-- select --")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "available" },
+                                domProps: {
+                                  selected:
+                                    _vm.machines[machine]["status"] ==
+                                    "available"
+                                }
+                              },
+                              [_vm._v("Available")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "running" },
+                                domProps: {
+                                  selected:
+                                    _vm.machines[machine]["status"] == "running"
+                                }
+                              },
+                              [_vm._v("Now Running")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "maintenance" },
+                                domProps: {
+                                  selected:
+                                    _vm.machines[machine]["status"] ==
+                                    "maintenance"
+                                }
+                              },
+                              [_vm._v("Maintenance")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "out-of-order" },
+                                domProps: {
+                                  selected:
+                                    _vm.machines[machine]["status"] ==
+                                    "out-of-order"
+                                }
+                              },
+                              [_vm._v("Out of order")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "hidden", name: "machine" },
+                        domProps: { value: machine }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-blue-dark bg-white border border-blue rounded py-px px-4 hover:bg-blue-dark hover:text-white hover:shadow"
+                        },
+                        [_vm._v("Update")]
+                      )
+                    ]
+                  )
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "text-blue-dark bg-white border border-blue rounded py-px px-4 hover:bg-blue-dark hover:text-white hover:shadow"
-              },
-              [_vm._v("Save")]
-            )
-          ]
-        )
-      ]
-    )
-  }
-]
+            ]
+          )
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
