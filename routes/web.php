@@ -33,6 +33,8 @@ Route::post('/messages', 'MessageController@store');
 
 Route::post('/status', 'StatusController@update');
 
+Route::get('/students', 'StudentController@index');
+
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');

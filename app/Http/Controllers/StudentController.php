@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('students.index', compact('users'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

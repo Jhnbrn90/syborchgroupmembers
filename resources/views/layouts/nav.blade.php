@@ -3,7 +3,7 @@
         <div class="w-1/4"></div>
         <div class="w-1/2 text-center">
             <div class="sm:text-5xl text-3xl font-hairline tracking-wide">
-                <img height="100" src="logo.jpg">
+                <a href="/"><img height="100" src="logo.jpg"></a>
             </div>
         </div>
 
