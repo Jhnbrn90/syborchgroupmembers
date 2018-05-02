@@ -25,7 +25,9 @@ Route::get('/', function () {
                     ];
                 });
 
-    return view('welcome', compact('messages', 'messageCount', 'machines'));
+    $date = Carbon::now()->format('Y-m-d');
+
+    return view('welcome', compact('date', 'messages', 'messageCount', 'machines'));
 });
 
 Route::get('/messages', 'MessageController@index');

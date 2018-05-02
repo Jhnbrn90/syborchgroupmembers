@@ -1,0 +1,121 @@
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/preflight";
+ */
+
+@tailwind preflight;
+
+/**
+ * This injects any component classes registered by plugins.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/components";
+ */
+
+@tailwind components;
+/**
+ * Here you would add any of your custom component classes; stuff that you'd
+ * want loaded *before* the utilities so that the utilities could still
+ * override them.
+ *
+ * Example:
+ *
+ * .btn { ... }
+ * .form-input { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "components/buttons";
+ * @import "components/forms";
+ */
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/utilities";
+ */
+
+@tailwind utilities;
+/**
+ * Here you would add any custom utilities you need that don't come out of the
+ * box with Tailwind.
+ *
+ * Example :
+ *
+ * .bg-pattern-graph-paper { ... }
+ * .skew-45 { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "utilities/background-patterns";
+ * @import "utilities/skew-transforms";
+ */
+
+.form-input {
+  @apply .border .border-blue-light .mb-4 .text-blue-dark .text-center .h-8 .bg-grey-lighter .rounded;
+}
+
+.form-select-input {
+  @apply .p-4 .border .border-blue-light .mb-4 .text-blue-light .text-center .h-8 .bg-grey-lighter .rounded;
+}
+
+/**
+* Select Buttons
+* General States
+**/
+.select-button {
+  @apply .rounded .py-2 .px-4 .shadow-md .border;
+}
+
+.select-button.active {
+  @apply .text-white .cursor-default;
+}
+
+.select-button.inactive {
+  @apply .bg-white .opacity-50;
+}
+
+.select-button.inactive:hover {
+  @apply .text-white .opacity-100 .shadow-lg;
+}
+
+/*** Select Buttons **/
+/*** Color Variants **/
+
+/** Grey **/
+.select-button.active.grey {
+  @apply .bg-grey-darker;
+}
+
+.select-button.inactive.grey:hover {
+  @apply .bg-grey-darker;
+}
+
+/** Blue **/
+.select-button.active.blue {
+  @apply .bg-blue;
+}
+
+.select-button.inactive.blue:hover {
+  @apply .bg-blue;
+}
+
+/** Indigo **/
+.select-button.active.indigo {
+  @apply .bg-indigo-dark;
+}
+
+.select-button.inactive.indigo:hover {
+  @apply .bg-indigo-dark;
+}

@@ -8,6 +8,7 @@
         bg-grey-lighter rounded" placeholder="E-mail address" autofocus required>
                 <input type="password" name="password" class="border border-blue-light mb-4 sm:mb-0 text-blue-dark text-center
         h-8 bg-grey-lighter rounded" placeholder="Password" required>
+                <input type="checkbox" name="remember" {{ old( 'remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
                 <button type="submit" class="bg-white text-blue-dark border border-blue rounded py-2 px-4 ml-2 hover:bg-blue hover:text-white
         shadow-md">Log in</button>
             </div>

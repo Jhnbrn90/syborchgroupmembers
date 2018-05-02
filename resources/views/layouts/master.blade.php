@@ -11,10 +11,9 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
 
     <style>
         html,

@@ -17508,6 +17508,7 @@ Vue.component("add-message", __webpack_require__(11));
 Vue.component("message-list", __webpack_require__(164));
 Vue.component("auth-buttons", __webpack_require__(169));
 Vue.component("status-list", __webpack_require__(172));
+Vue.component("student-selector", __webpack_require__(180));
 
 var app = new Vue({
   el: "#app"
@@ -35917,6 +35918,244 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(181)
+/* template */
+var __vue_template__ = __webpack_require__(182)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/StudentSelector.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-79d54d53", Component.options)
+  } else {
+    hotAPI.reload("data-v-79d54d53", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 181 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      selectors: {
+        group: "syborch",
+        members: "Students",
+        time: "Current"
+      }
+    };
+  },
+
+
+  methods: {
+    select: function select(input, selector) {
+      this.selectors[selector] = input;
+    },
+    isSelected: function isSelected(input, selector) {
+      return this.selectors[selector] == input;
+    }
+  }
+});
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "flex justify-center mb-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "text-xs select-button blue mr-2",
+          class: _vm.isSelected("syborch", "group") ? "active" : "inactive",
+          on: {
+            click: function($event) {
+              _vm.select("syborch", "group")
+            }
+          }
+        },
+        [_vm._v("\n            SyBOrCh\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "text-xs select-button blue",
+          class: _vm.isSelected("grossmann", "group") ? "active" : "inactive",
+          on: {
+            click: function($event) {
+              _vm.select("grossmann", "group")
+            }
+          }
+        },
+        [_vm._v("\n            Grossmann\n        ")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex justify-center mb-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "text-xs select-button indigo mr-2",
+          class: _vm.isSelected("Students", "members") ? "active" : "inactive",
+          on: {
+            click: function($event) {
+              _vm.select("Students", "members")
+            }
+          }
+        },
+        [_vm._v("\n            Students\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "text-xs select-button indigo mr-2",
+          class: _vm.isSelected("Staff", "members") ? "active" : "inactive",
+          on: {
+            click: function($event) {
+              _vm.select("Staff", "members")
+            }
+          }
+        },
+        [_vm._v("\n            Staff\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "text-xs select-button indigo",
+          class: _vm.isSelected("All", "members") ? "active" : "inactive",
+          on: {
+            click: function($event) {
+              _vm.select("All", "members")
+            }
+          }
+        },
+        [_vm._v("\n            All members\n        ")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex justify-center mb-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "text-xs select-button grey mr-2",
+          class: _vm.isSelected("Current", "time") ? "active" : "inactive",
+          on: {
+            click: function($event) {
+              _vm.select("Current", "time")
+            }
+          }
+        },
+        [_vm._v("\n            Current\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "text-xs select-button grey",
+          class: _vm.isSelected("All", "time") ? "active" : "inactive",
+          on: {
+            click: function($event) {
+              _vm.select("All", "time")
+            }
+          }
+        },
+        [_vm._v("\n            All-time\n        ")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-79d54d53", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
