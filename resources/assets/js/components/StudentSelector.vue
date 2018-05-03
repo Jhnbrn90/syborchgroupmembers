@@ -9,6 +9,9 @@
         <button @click="select('grossmann', 'group')" :class="isSelected('grossmann', 'group') ? 'active' : 'inactive'" class="text-xs select-button blue">
             Grossmann
         </button>
+        <button @click="select('all', 'group')" :class="isSelected('all', 'group') ? 'active' : 'inactive'" class="text-xs select-button blue">
+            Both
+        </button>
     </div>
 
     <div class="flex justify-center mb-2">

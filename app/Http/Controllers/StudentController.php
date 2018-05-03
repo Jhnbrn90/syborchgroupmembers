@@ -18,7 +18,7 @@ class StudentController extends Controller
 
     public function getApi(Request $request)
     {
-        $users = User::where('group', $request['group'])
+        $users = User::inGroup($request['group'])
                 ->hasRole($request['members'])
                 ->timePeriod($request['time'])
                 ->orderBy('start_date', 'DESC')

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="onSubmit" method="POST" action="/messages" class="w-1/2 text-center inline-flex mt-2">
+    <form @submit.prevent="onSubmit" method="POST" action="/messages" class="sm:w-1/2 w-4/5 text-center inline-flex mt-2">
         <input v-model="message" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mr-2" placeholder="Send a message...">
         <button type="submit"
         :class="classes">

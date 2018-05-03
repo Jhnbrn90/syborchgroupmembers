@@ -11,4 +11,5 @@
 
     <message-list :data="{{ $messages }}" auth="{{ Auth::check() }}"></message-list>
 </div>
+<div class="mt-4 -mb-6 flex justify-center text-xs">by John Braun</div>
 @endsection

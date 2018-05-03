@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,300" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <style>
         html,

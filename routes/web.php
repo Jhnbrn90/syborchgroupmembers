@@ -9,7 +9,7 @@ Auth::routes();
 Route::post('/newregister', 'StudentController@store')->name('register-student');
 
 Route::get('/', function () {
-    $messages = Message::with('user')->latest()->get();
+    $messages = Message::whereDate('created_at', '=', Carbon::today()->toDateString())->with('user')->latest()->get();
     $messageCount = $messages->count();
     $messages = $messages->toJson();
 
@@ -35,6 +35,7 @@ Route::post('/messages', 'MessageController@store');
 
 Route::post('/status', 'StatusController@update');
 Route::get('/equipment', 'EquipmentController@index');
+Route::get('/equipment/{equipment}', 'EquipmentController@show');
 
 Route::get('/members', 'StudentController@index');
 

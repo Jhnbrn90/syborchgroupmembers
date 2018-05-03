@@ -19,6 +19,17 @@
     </div>
   </div>
 
+<div class="invisible sm:visible flex justify-center sm:mt-2">
+      <div class="flex justify-center text-xs text-grey items-center">
+      <span class="text-grey text-base mr-px">(</span>
+        <div class="mr-2"><div class="inline-flex w-4 h-2 rounded full mr-px bg-green"></div> Available</div>
+        <div class="mr-2"><div class="inline-flex w-4 h-2 rounded full mr-px bg-blue-dark"></div> Running</div>
+        <div class="mr-2"><div class="inline-flex w-4 h-2 rounded full mr-px bg-orange"></div> Maintenance</div>
+        <div class="mr-px"><div class="inline-flex w-4 h-2 rounded full mr-px bg-red-dark"></div> Out of Order</div>
+     <span class="text-grey text-base">)</span>
+      </div>
+  </div>
+
 <div v-for="machine in Object.keys(machines)">
 <div :id="machine" class="flex justify-center items-center mt-4 hidden">
     <div class="p-4 w-full h-auto shadow-md text-center border border-grey">

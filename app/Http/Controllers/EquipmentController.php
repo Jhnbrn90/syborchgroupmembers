@@ -8,4 +8,9 @@ class EquipmentController extends Controller
     {
         return view('equipment.index');
     }
+
+    public function show($equipment)
+    {
+        return view('equipment.show', compact('equipment'));
+    }
 }

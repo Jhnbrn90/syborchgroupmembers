@@ -27,6 +27,15 @@ class User extends Authenticatable
         return $query->where('role', $role);
     }
 
+    public function scopeInGroup($query, $group)
+    {
+        if ($group == 'all') {
+            return $query;
+        }
+
+        return $query->where('group', $group);
+    }
+
     public function scopeTimePeriod($query, $time)
     {
         if ($time == 'current') {
