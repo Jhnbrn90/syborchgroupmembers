@@ -96,9 +96,15 @@ export default {
       this.machines[Object.keys(e.status)[0]] =
         e.status[Object.keys(e.status)[0]];
     });
+
+    setInterval(this.updateComponent, 60000);
   },
 
   methods: {
+    updateComponent() {
+      axios.get("/machines/status").then(({ data }) => (this.machines = data));
+    },
+
     onSubmit() {
       axios
         .post("/status", {

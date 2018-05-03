@@ -34907,10 +34907,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.messages.unshift(e.message);
       _this.messageCount += 1;
     });
+
+    setInterval(this.updateComponent, 60000);
   },
 
 
   methods: {
+    updateComponent: function updateComponent() {
+      var _this2 = this;
+
+      axios.get("/api/messages").then(function (_ref) {
+        var data = _ref.data;
+
+        _this2.messages = data;
+        _this2.messageCount = _this2.data.length;
+      });
+    },
     login: function login() {
       document.querySelector("#login-modal").style.display = "flex";
     },
@@ -34919,11 +34931,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.messageCount += 1;
     },
     refreshMessages: function refreshMessages() {
-      var _this2 = this;
+      var _this3 = this;
 
-      axios.get("/messages").then(function (_ref) {
-        var data = _ref.data;
-        return _this2.messages = data;
+      axios.get("/messages").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this3.messages = data;
       });
     }
   },
@@ -35647,29 +35659,39 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
     window.Echo.channel("status-updates").listen("StatusUpdated", function (e) {
       _this.machines[Object.keys(e.status)[0]] = e.status[Object.keys(e.status)[0]];
     });
+
+    setInterval(this.updateComponent, 60000);
   },
 
 
   methods: {
-    onSubmit: function onSubmit() {
+    updateComponent: function updateComponent() {
       var _this2 = this;
+
+      axios.get("/machines/status").then(function (_ref) {
+        var data = _ref.data;
+        return _this2.machines = data;
+      });
+    },
+    onSubmit: function onSubmit() {
+      var _this3 = this;
 
       axios.post("/status", {
         machine: this.form.machine,
         status: this.form.status
-      }).then(function (_ref) {
-        var data = _ref.data;
+      }).then(function (_ref2) {
+        var data = _ref2.data;
 
-        _this2.machines[_this2.form.machine] = data;
-        document.getElementById(_this2.form.machine).classList.add("hidden");
-        _this2.modalOpen[_this2.form.machine] = false;
+        _this3.machines[_this3.form.machine] = data;
+        document.getElementById(_this3.form.machine).classList.add("hidden");
+        _this3.modalOpen[_this3.form.machine] = false;
       });
     },
     indicatorClass: function indicatorClass(machine) {
       return this.lookup[this.machines[machine]["status"]];
     },
     toggleModal: function toggleModal(machine) {
-      var _this3 = this;
+      var _this4 = this;
 
       // if the modal was already open, close it
       if (this.modalOpen[machine]) {
@@ -35680,13 +35702,13 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
       } else {
         // if the modal was not yet open
         // 1. close all other modals
-        Object.entries(this.modalOpen).forEach(function (_ref2) {
-          var _ref3 = _slicedToArray(_ref2, 2),
-              key = _ref3[0],
-              value = _ref3[1];
+        Object.entries(this.modalOpen).forEach(function (_ref3) {
+          var _ref4 = _slicedToArray(_ref3, 2),
+              key = _ref4[0],
+              value = _ref4[1];
 
           if (key !== machine) {
-            _this3.modalOpen[machine] = false;
+            _this4.modalOpen[machine] = false;
             document.getElementById(key).classList.add("hidden");
           }
         });

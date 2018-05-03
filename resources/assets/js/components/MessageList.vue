@@ -59,9 +59,18 @@ export default {
       this.messages.unshift(e.message);
       this.messageCount += 1;
     });
+
+    setInterval(this.updateComponent, 60000);
   },
 
   methods: {
+    updateComponent() {
+      axios.get("/api/messages").then(({ data }) => {
+        this.messages = data;
+        this.messageCount = this.data.length;
+      });
+    },
+
     login() {
       document.querySelector("#login-modal").style.display = "flex";
     },
