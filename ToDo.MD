@@ -1,6 +1,5 @@
-# Big button on page
+# Appify
 
-    * /machine/SFCMS, /machine/NMR300, etc.
+# Tijd goed zetten database --> zorgen voor update verzoek richting database in event dispatcher?
 
-
-    # Appify
+Event StatusUpdated() --> triggers updated_at to update

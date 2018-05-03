@@ -35,6 +35,7 @@ Route::post('/messages', 'MessageController@store');
 
 Route::post('/status', 'StatusController@update');
 Route::get('/equipment', 'EquipmentController@index');
+Route::post('/equipment/update', 'EquipmentController@update');
 Route::get('/equipment/{equipment}', 'EquipmentController@show');
 
 Route::get('/members', 'StudentController@index');
