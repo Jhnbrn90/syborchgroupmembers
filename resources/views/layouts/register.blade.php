@@ -18,12 +18,12 @@
 
             <div class="flex-inline sm:mb-4">
                 Group
-                <select name="group" class="form-select-input sm:mb-0">
+                <select name="group" class="form-select-input sm:mb-0" required>
                     <option value="syborch">SyBOrCh</option>
                     <option value="grossmann">Grossmann</option>
                 </select>
 
-                <select name="role" class="form-select-input sm:mb-0">
+                <select name="role" class="form-select-input sm:mb-0" required>
                     <option value="student">Student</option>
                     <option value="staff">Staff</option>
                 </select>
@@ -31,7 +31,7 @@
 
             <div class="flex-inline sm:mb-4">
                 Start Date
-                <input value="{{ $date }}" type="date" name="start" class="form-select-input sm:mb-0">
+                <input type="date" name="start" value="{{ $date }}" class="form-select-input sm:mb-0">
             </div>
             <div class="flex-inline sm:mb-4">
                 End Date

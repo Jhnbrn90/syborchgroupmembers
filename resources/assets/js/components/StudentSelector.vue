@@ -1,6 +1,8 @@
 <template>
 <div>
-    <div class="flex justify-center mb-2">
+    <div class="mx-auto py-4 sm:w-2/5 shadow-lg border-t border-grey-light bg-white rounded-lg mb-4">
+
+        <div class="flex justify-center mb-2">
         <button @click="select('syborch', 'group')" :class="isSelected('syborch', 'group') ? 'active' : 'inactive'" class="text-xs select-button blue mr-2">
             SyBOrCh
         </button>
@@ -10,50 +12,161 @@
     </div>
 
     <div class="flex justify-center mb-2">
-        <button @click="select('Students', 'members')" :class="isSelected('Students', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo mr-2">
+        <button @click="select('student', 'members')" :class="isSelected('student', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo mr-2">
             Students
         </button>
-        <button @click="select('Staff', 'members')" :class="isSelected('Staff', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo mr-2">
+        <button @click="select('staff', 'members')" :class="isSelected('staff', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo mr-2">
             Staff
         </button>
-        <button @click="select('All', 'members')" :class="isSelected('All', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo">
+        <button @click="select('all', 'members')" :class="isSelected('all', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo">
             All members
         </button>
     </div>
 
-    <div class="flex justify-center mb-2">
-        <button @click="select('Current', 'time')" :class="isSelected('Current', 'time') ? 'active' : 'inactive'" class="text-xs select-button grey mr-2">
+    <div class="flex justify-center mb-4">
+        <button @click="select('current', 'time')" :class="isSelected('current', 'time') ? 'active' : 'inactive'" class="text-xs select-button grey mr-2">
             Current
         </button>
-        <button @click="select('All', 'time')" :class="isSelected('All', 'time') ? 'active' : 'inactive'" class="text-xs select-button grey">
+        <button @click="select('all', 'time')" :class="isSelected('all', 'time') ? 'active' : 'inactive'" class="text-xs select-button grey">
             All-time
         </button>
     </div>
+
+    </div>
+
+    <div class="flex justify-center align-items items-center">
+        <button class="px-4 py-2 rounded bg-white border border-blue-dark hover:bg-blue-dark hover:text-white"
+        v-clipboard:copy="emailString"
+        @click="handleCopyStatus('success')"
+        >
+        <span v-if="copySuccess === true">Copied!</span>
+        <span v-if="copySuccess !== true">Copy e-mails</span>
+        </button>
+    </div>
+
+                    <div class="sm:flex justify-center">
+                    <table class="text-left m-4" style="border-collapse:collapse">
+                        <thead>
+                            <tr>
+                                <th class="table-heading">
+                                    Firstname
+                                </th>
+                                <th class="table-heading">
+                                    Lastname
+                                </th>
+                                <th class="table-heading">
+                                    E-mail
+                                </th>
+                                <th class="table-heading">
+                                    Phone number
+                                </th>
+                                <th class="table-heading">
+                                    Start date
+                                </th>
+                                <th class="table-heading">
+                                    End date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-blue-lighter" v-for="user in users">
+                                <td class="py-4 px-6 border-b border-grey-light">
+                                    {{ user.firstname }}
+                                </td>
+                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                    {{ user.lastname }}
+                                </td>
+                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                    {{ user.email }}
+                                </td>
+                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                    {{ user.phone }}
+                                </td>
+                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                    {{ formatDate(user.start_date) }}
+                                </td>
+                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                    {{ formatDate(user.end_date) }}
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
 </div>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   data() {
     return {
+      copySuccess: false,
+      emails: [],
+      emailString: "",
+      users: [],
+
       selectors: {
         group: "syborch",
-        members: "Students",
-        time: "Current"
+        members: "student",
+        time: "current"
       }
     };
+  },
+
+  created() {
+    this.getMembers();
   },
 
   methods: {
     select(input, selector) {
       this.selectors[selector] = input;
+      this.getMembers();
     },
 
     isSelected(input, selector) {
       return this.selectors[selector] == input;
+    },
+
+    formatDate(date) {
+      return moment(date).format("LL");
+    },
+
+    handleCopyStatus(status) {
+      if (status == "success") {
+        this.copySuccess = true;
+        setTimeout(() => {
+          this.copySuccess = false;
+        }, 2000);
+      }
+    },
+
+    getMembers() {
+      this.emails = [];
+
+      axios
+        .post("/students/get", {
+          group: this.selectors.group,
+          members: this.selectors.members,
+          time: this.selectors.time
+        })
+        .then(response => {
+          this.users = response.data;
+          this.users.forEach(user => {
+            this.emails.push(user.email);
+          });
+          this.generateEmailString();
+        });
+    },
+
+    generateEmailString() {
+      let mail = "";
+      this.emails.forEach(email => {
+        mail += email + "; ";
+      });
+      this.emailString = mail;
     }
   }
 };
 </script>
-
-

@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('group');
             $table->string('role');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

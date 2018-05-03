@@ -70,6 +70,10 @@
   @apply .p-4 .border .border-blue-light .mb-4 .text-blue-light .text-center .h-8 .bg-grey-lighter .rounded;
 }
 
+.table-heading {
+  @apply .py-4 .px-6 .bg-grey-lighter .font-sans .font-medium .uppercase .text-sm .text-grey .border-b .border-grey-light;
+}
+
 /**
 * Select Buttons
 * General States
