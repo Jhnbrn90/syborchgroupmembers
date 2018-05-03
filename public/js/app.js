@@ -17508,14 +17508,13 @@ window.Vue = __webpack_require__(159);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
-
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_clipboard2___default.a);
-
 Vue.component("add-message", __webpack_require__(11));
 Vue.component("message-list", __webpack_require__(166));
 Vue.component("auth-buttons", __webpack_require__(171));
 Vue.component("status-list", __webpack_require__(174));
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_clipboard2___default.a);
 Vue.component("student-selector", __webpack_require__(177));
 
 var app = new Vue({
@@ -35028,6 +35027,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     ago: function ago(date) {
       return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).fromNow();
     }
+  },
+
+  computed: {
+    todaysDate: function todaysDate() {
+      return __WEBPACK_IMPORTED_MODULE_0_moment___default()().format("dddd D MMM");
+    }
   }
 });
 
@@ -35371,7 +35376,11 @@ var render = function() {
                   staticClass:
                     "text-xl tracking-wide font-medium leading-normal text-blue-dark"
                 },
-                [_vm._v("\n            Friday 24 April\n          ")]
+                [
+                  _vm._v(
+                    "\n            " + _vm._s(_vm.todaysDate) + "\n          "
+                  )
+                ]
               ),
               _vm._v(" "),
               _c("br"),
@@ -35697,6 +35706,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
       lookup: {
         "SFC-MS": "SFC-MS",
+        "GC-MS": "GC-MS",
         NMR300: "NMR 300",
         NMR500: "NMR 500",
         NMR600: "NMR 600",
@@ -35708,6 +35718,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
       modalOpen: {
         "SFC-MS": false,
+        "GC-MS": false,
         NMR300: false,
         NMR500: false,
         NMR600: false
@@ -35789,7 +35800,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "flex py-4 mt-8 pt-4 justify-center items-center border-t border-grey-light shadow-md"
+            "flex py-4 px-6 sm:px-0 sm:mt-8 mt-6 pt-4 justify-center items-center border-t border-grey-light shadow-md"
         },
         _vm._l(Object.keys(_vm.machines), function(machine) {
           return _c("div", [
@@ -35798,37 +35809,41 @@ var render = function() {
               class: _vm.indicatorClass(machine)
             }),
             _vm._v(" "),
-            _c("div", { staticClass: "inline-flex mr-4 text-sm" }, [
-              _vm.auth
-                ? _c("div", [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "text-grey-dark hover:cursor-pointer hover:underline",
-                        on: {
-                          click: function($event) {
-                            _vm.toggleModal(machine)
+            _c(
+              "div",
+              { staticClass: "inline-flex sm:mr-4 mr-2 sm:text-sm text-xs" },
+              [
+                _vm.auth
+                  ? _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-grey-dark hover:cursor-pointer hover:underline",
+                          on: {
+                            click: function($event) {
+                              _vm.toggleModal(machine)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(_vm.lookup[machine]) +
-                            "\n              "
-                        )
-                      ]
-                    )
-                  ])
-                : _c("div", [
-                    _vm._v(
-                      "\n              " +
-                        _vm._s(_vm.lookup[machine]) +
-                        "\n            "
-                    )
-                  ])
-            ])
+                        },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.lookup[machine]) +
+                              "\n              "
+                          )
+                        ]
+                      )
+                    ])
+                  : _c("div", [
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(_vm.lookup[machine]) +
+                          "\n            "
+                      )
+                    ])
+              ]
+            )
           ])
         })
       ),
@@ -35865,13 +35880,13 @@ var render = function() {
                         "h4",
                         {
                           staticClass:
-                            "text-blue-dark underline font-medium text-lg mb-2"
+                            "text-blue-dark underline font-medium sm:text-lg text-base mb-2"
                         },
                         [_vm._v(_vm._s(machine))]
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "mb-2" }, [
-                        _vm._v("Used by "),
+                        _vm._v("Updated by "),
                         _c("span", { staticClass: "font-medium" }, [
                           _vm._v(
                             _vm._s(_vm.machines[machine]["user"]) +
@@ -36391,13 +36406,15 @@ var render = function() {
           _vm.copySuccess === true ? _c("span", [_vm._v("Copied!")]) : _vm._e(),
           _vm._v(" "),
           _vm.copySuccess !== true
-            ? _c("span", [_vm._v("Copy e-mails")])
+            ? _c("span", [
+                _vm._v("Copy e-mails (" + _vm._s(this.users.length) + ")")
+              ])
             : _vm._e()
         ]
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "sm:flex justify-center" }, [
+    _c("div", { staticClass: "invisible md:visible sm:flex justify-center" }, [
       _c(
         "table",
         {

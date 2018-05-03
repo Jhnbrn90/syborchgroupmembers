@@ -15,7 +15,7 @@
       <div class="bg-white h-auto py-4 max-w-lg mx-auto px-8">
         <p class="font-thin mb-6">
           <span class="text-xl tracking-wide font-medium leading-normal text-blue-dark">
-            Friday 24 April
+            {{ todaysDate }}
           </span>
           <br>
           <span class="text-grey">Messages</span>
@@ -79,6 +79,12 @@ export default {
   filters: {
     ago(date) {
       return moment(date).fromNow();
+    }
+  },
+
+  computed: {
+    todaysDate() {
+      return moment().format("dddd D MMM");
     }
   }
 };

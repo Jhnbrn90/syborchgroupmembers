@@ -14,14 +14,13 @@ window.Vue = require("vue");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import VueClipboard from "vue-clipboard2";
-
-Vue.use(VueClipboard);
-
 Vue.component("add-message", require("./components/AddMessage.vue"));
 Vue.component("message-list", require("./components/MessageList.vue"));
 Vue.component("auth-buttons", require("./components/AuthButtons.vue"));
 Vue.component("status-list", require("./components/StatusList.vue"));
+
+import VueClipboard from "vue-clipboard2";
+Vue.use(VueClipboard);
 Vue.component("student-selector", require("./components/StudentSelector.vue"));
 
 const app = new Vue({

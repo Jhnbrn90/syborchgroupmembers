@@ -1,11 +1,11 @@
 <template>
 <div>
 
-  <div class="flex py-4 mt-8 pt-4 justify-center items-center border-t border-grey-light shadow-md">
+  <div class="flex py-4 px-6 sm:px-0 sm:mt-8 mt-6 pt-4 justify-center items-center border-t border-grey-light shadow-md">
     <div v-for="machine in Object.keys(machines)">
 
         <div :class="indicatorClass(machine)" class="inline-flex w-2 h-2 rounded full mr-px shadow"></div>
-        <div class="inline-flex mr-4 text-sm">
+        <div class="inline-flex sm:mr-4 mr-2 sm:text-sm text-xs">
             <div v-if="auth">
               <button @click="toggleModal(machine)" class="text-grey-dark hover:cursor-pointer hover:underline">
                 {{ lookup[machine] }}
@@ -23,8 +23,8 @@
 <div :id="machine" class="flex justify-center items-center mt-4 hidden">
     <div class="p-4 w-full h-auto shadow-md text-center border border-grey">
       <form @submit.prevent="onSubmit" action="/status">
-        <h4 class="text-blue-dark underline font-medium text-lg mb-2">{{ machine }}</h4>
-        <span class="mb-2">Used by <span class="font-medium">{{ machines[machine]['user'] }} ({{ machines[machine]['time'] }})</span></span>
+        <h4 class="text-blue-dark underline font-medium sm:text-lg text-base mb-2">{{ machine }}</h4>
+        <span class="mb-2">Updated by <span class="font-medium">{{ machines[machine]['user'] }} ({{ machines[machine]['time'] }})</span></span>
         <div class="flex-inline mb-4 mt-2">
             <span class="mr-2">Current status:</span>
             <select class="shadow" name="status" v-model="form.status">
@@ -60,6 +60,7 @@ export default {
 
       lookup: {
         "SFC-MS": "SFC-MS",
+        "GC-MS": "GC-MS",
         NMR300: "NMR 300",
         NMR500: "NMR 500",
         NMR600: "NMR 600",
@@ -71,6 +72,7 @@ export default {
 
       modalOpen: {
         "SFC-MS": false,
+        "GC-MS": false,
         NMR300: false,
         NMR500: false,
         NMR600: false

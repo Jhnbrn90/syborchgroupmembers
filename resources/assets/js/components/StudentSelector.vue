@@ -40,11 +40,11 @@
         @click="handleCopyStatus('success')"
         >
         <span v-if="copySuccess === true">Copied!</span>
-        <span v-if="copySuccess !== true">Copy e-mails</span>
+        <span v-if="copySuccess !== true">Copy e-mails ({{ this.users.length }})</span>
         </button>
     </div>
 
-                    <div class="sm:flex justify-center">
+                    <div class="invisible md:visible sm:flex justify-center">
                     <table class="text-left m-4" style="border-collapse:collapse">
                         <thead>
                             <tr>
