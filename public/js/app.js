@@ -36253,12 +36253,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      filters: true,
       copySuccess: false,
       emails: [],
       emailString: "",
@@ -36277,6 +36281,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+    toggleFilters: function toggleFilters() {
+      this.filters ? this.filters = false : this.filters = true;
+    },
     select: function select(input, selector) {
       this.selectors[selector] = input;
       this.getMembers();
@@ -36333,18 +36340,38 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("div", { staticClass: "flex justify-center mb-4" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "underline hover:text-blue-dark text-grey-dark font-medium text-lg hover:cursor-pointer",
+          on: { click: _vm.toggleFilters }
+        },
+        [_vm._v(_vm._s(this.filters ? "Hide" : "Show") + " Filters")]
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.filters,
+            expression: "filters"
+          }
+        ],
         staticClass:
-          "mx-auto py-4 sm:w-2/5 shadow-lg border-t border-grey-light bg-white rounded-lg mb-4"
+          "pt-4 mx-auto py-px sm:w-1/3 shadow-lg border-t border-grey-light bg-white rounded-lg mb-4"
       },
       [
         _c("div", { staticClass: "flex justify-center mb-2" }, [
           _c(
             "button",
             {
-              staticClass: "text-xs select-button blue mr-2",
+              staticClass: "text-base select-button blue mr-2",
               class: _vm.isSelected("syborch", "group") ? "active" : "inactive",
               on: {
                 click: function($event) {
@@ -36358,7 +36385,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "text-xs select-button blue",
+              staticClass: "text-base select-button blue mr-2",
               class: _vm.isSelected("grossmann", "group")
                 ? "active"
                 : "inactive",
@@ -36374,7 +36401,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "text-xs select-button blue",
+              staticClass: "text-base select-button blue",
               class: _vm.isSelected("all", "group") ? "active" : "inactive",
               on: {
                 click: function($event) {
@@ -36390,7 +36417,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "text-xs select-button indigo mr-2",
+              staticClass: "text-base select-button indigo mr-2",
               class: _vm.isSelected("student", "members")
                 ? "active"
                 : "inactive",
@@ -36406,7 +36433,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "text-xs select-button indigo mr-2",
+              staticClass: "text-base select-button indigo mr-2",
               class: _vm.isSelected("staff", "members") ? "active" : "inactive",
               on: {
                 click: function($event) {
@@ -36420,7 +36447,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "text-xs select-button indigo",
+              staticClass: "text-base select-button indigo",
               class: _vm.isSelected("all", "members") ? "active" : "inactive",
               on: {
                 click: function($event) {
@@ -36436,7 +36463,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "text-xs select-button grey mr-2",
+              staticClass: "text-base select-button grey mr-2",
               class: _vm.isSelected("current", "time") ? "active" : "inactive",
               on: {
                 click: function($event) {
@@ -36450,7 +36477,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "text-xs select-button grey",
+              staticClass: "text-base select-button grey",
               class: _vm.isSelected("all", "time") ? "active" : "inactive",
               on: {
                 click: function($event) {

@@ -1,36 +1,39 @@
 <template>
 <div>
-    <div class="mx-auto py-4 sm:w-2/5 shadow-lg border-t border-grey-light bg-white rounded-lg mb-4">
+    <div class="flex justify-center mb-4">
+        <button @click="toggleFilters" class="underline hover:text-blue-dark text-grey-dark font-medium text-lg hover:cursor-pointer">{{ this.filters ? 'Hide' : 'Show' }} Filters</button>
+    </div>
 
+    <div class="pt-4 mx-auto py-px sm:w-1/3 shadow-lg border-t border-grey-light bg-white rounded-lg mb-4" v-show="filters">
         <div class="flex justify-center mb-2">
-        <button @click="select('syborch', 'group')" :class="isSelected('syborch', 'group') ? 'active' : 'inactive'" class="text-xs select-button blue mr-2">
+        <button @click="select('syborch', 'group')" :class="isSelected('syborch', 'group') ? 'active' : 'inactive'" class="text-base select-button blue mr-2">
             SyBOrCh
         </button>
-        <button @click="select('grossmann', 'group')" :class="isSelected('grossmann', 'group') ? 'active' : 'inactive'" class="text-xs select-button blue">
+        <button @click="select('grossmann', 'group')" :class="isSelected('grossmann', 'group') ? 'active' : 'inactive'" class="text-base select-button blue mr-2">
             Grossmann
         </button>
-        <button @click="select('all', 'group')" :class="isSelected('all', 'group') ? 'active' : 'inactive'" class="text-xs select-button blue">
+        <button @click="select('all', 'group')" :class="isSelected('all', 'group') ? 'active' : 'inactive'" class="text-base select-button blue">
             Both
         </button>
     </div>
 
     <div class="flex justify-center mb-2">
-        <button @click="select('student', 'members')" :class="isSelected('student', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo mr-2">
+        <button @click="select('student', 'members')" :class="isSelected('student', 'members') ? 'active' : 'inactive'" class="text-base select-button indigo mr-2">
             Students
         </button>
-        <button @click="select('staff', 'members')" :class="isSelected('staff', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo mr-2">
+        <button @click="select('staff', 'members')" :class="isSelected('staff', 'members') ? 'active' : 'inactive'" class="text-base select-button indigo mr-2">
             Staff
         </button>
-        <button @click="select('all', 'members')" :class="isSelected('all', 'members') ? 'active' : 'inactive'" class="text-xs select-button indigo">
+        <button @click="select('all', 'members')" :class="isSelected('all', 'members') ? 'active' : 'inactive'" class="text-base select-button indigo">
             All members
         </button>
     </div>
 
     <div class="flex justify-center mb-4">
-        <button @click="select('current', 'time')" :class="isSelected('current', 'time') ? 'active' : 'inactive'" class="text-xs select-button grey mr-2">
+        <button @click="select('current', 'time')" :class="isSelected('current', 'time') ? 'active' : 'inactive'" class="text-base select-button grey mr-2">
             Current
         </button>
-        <button @click="select('all', 'time')" :class="isSelected('all', 'time') ? 'active' : 'inactive'" class="text-xs select-button grey">
+        <button @click="select('all', 'time')" :class="isSelected('all', 'time') ? 'active' : 'inactive'" class="text-base select-button grey">
             All-time
         </button>
     </div>
@@ -105,6 +108,7 @@ import moment from "moment";
 export default {
   data() {
     return {
+      filters: true,
       copySuccess: false,
       emails: [],
       emailString: "",
@@ -123,6 +127,10 @@ export default {
   },
 
   methods: {
+    toggleFilters() {
+      this.filters ? (this.filters = false) : (this.filters = true);
+    },
+
     select(input, selector) {
       this.selectors[selector] = input;
       this.getMembers();
