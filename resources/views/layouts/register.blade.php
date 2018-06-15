@@ -18,12 +18,12 @@
 
             <div class="flex-inline sm:mb-4">
                 Group
-                <select name="group" class="form-select-input sm:mb-0" required>
+                <select name="group" class="border border-blue-dark rounded p-2 sm:mb-0" required>
                     <option value="syborch">SyBOrCh</option>
                     <option value="grossmann">Grossmann</option>
                 </select>
 
-                <select name="role" class="form-select-input sm:mb-0" required>
+                <select name="role" class="border border-blue-dark rounded p-2 sm:mb-0" required>
                     <option value="student">Student</option>
                     <option value="staff">Staff</option>
                 </select>

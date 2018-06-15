@@ -32,7 +32,7 @@ class StudentController extends Controller
         $validated = $request->validate([
             'firstname' => 'required',
             'lastname'  => 'required',
-            'email'     => 'required|email|unique:users',
+            'email'     => 'required|email',
             'group'     => 'required',
             'role'      => 'required',
             'password'  => 'required',
@@ -42,6 +42,19 @@ class StudentController extends Controller
 
         $start = Carbon::parse($validated['start']);
         $end = Carbon::parse($validated['end']);
+	
+	// check if user already had an account previously
+	if(User::where('email', $validated['email'])->count() > 0) {
+		$user = User::where('email', $validated['email'])->first();
+		$user->password = Hash::make($validated['password']);
+		$user->phone = $request['phone'];
+		$user->group = $validated['group'];
+		$user->role = $validated['role'];
+		$user->start_date = $start;
+		$user->end_date = $end;
+		$user->save();
+	} else {
+
 
         $user = User::create([
             'firstname'  => $validated['firstname'],
@@ -53,7 +66,8 @@ class StudentController extends Controller
             'role'       => $validated['role'],
             'start_date' => $start,
             'end_date'   => $end
-        ]);
+	    ]);
+	}
 
         Auth::login($user, true);
 

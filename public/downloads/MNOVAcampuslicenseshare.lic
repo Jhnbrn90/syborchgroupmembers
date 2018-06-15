@@ -1,0 +1,16 @@
+<mlic version="1.0">
+<licid>{4a392b79-d992-41d9-9163-0cab5aca2663}</licid>
+<type>campus</type>
+<hostid>LFRAP-L9S3RZ8B-FB5VX-WX1M1DYA</hostid>
+<vendor>Mestrelab Research S.L.</vendor>
+<purchaser>Vrije Universiteit</purchaser>
+<product>NMR</product>
+<version>1.11</version>
+<uuid>{5b0a2812-8ee2-406f-8030-84f5f6ac4a4b}</uuid>
+<count>5000</count>
+<issued>2016-04-29</issued>
+<expires>never</expires>
+<update>2017-04-29</update>
+<sign>F7/63nkVQQb9GD6MtAl9zKdn4TdVs7Dmu1G9+yI+Dv20h+VjT5FABs1ETq4MkyX7XDzVVOvmS3MqE6rSR4kv3xG5tkJf861wEb41ftx1nv9gyPxfCQS7UmwOOh96VySUhMj9pQOt2PSaOaXJRNIMwxhkfQaIdvnTLYiTaaxYbdIZ95Xk5+rZwRZ4lV0eKQc4djiqkpFATyKNEUGG1yTkvHVKb3UfI1uwNZNOztBDgfu/A31h7+dw2Oww7KjY0k933BqQ8r325ZXdUmNGRrPiHqo2ijqAeFd4JDKDIu2cwc+ToURBtnhlFkU11u6GEIfPoIlgMKTye7RDvnxLJoi+mg==</sign>
+<server>145.108.170.199</server>
+</mlic>

@@ -60,7 +60,7 @@ export default {
       this.messageCount += 1;
     });
 
-    setInterval(this.updateComponent, 60000);
+    setInterval(this.updateComponent, 10000);
   },
 
   methods: {

@@ -76,22 +76,22 @@
                         </thead>
                         <tbody>
                             <tr class="hover:bg-blue-lighter" v-for="user in users">
-                                <td class="py-4 px-6 border-b border-grey-light">
+                                <td class="font-medium text-grey-darkest py-4 px-6 border-b border-grey-light">
                                     {{ user.firstname }}
                                 </td>
-                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                <td class="font-medium text-grey-darkest py-4 px-6 border-b border-grey-light text-center">
                                     {{ user.lastname }}
                                 </td>
-                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                <td class="font-medium text-grey-darkest py-4 px-6 border-b border-grey-light text-center">
                                     {{ user.email }}
                                 </td>
-                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                <td class="font-medium text-grey-darkest py-4 px-6 border-b border-grey-light text-center">
                                     {{ user.phone }}
                                 </td>
-                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                <td class="font-medium text-grey-darkest py-4 px-6 border-b border-grey-light text-center">
                                     {{ formatDate(user.start_date) }}
                                 </td>
-                                <td class="py-4 px-6 border-b border-grey-light text-center">
+                                <td class="font-medium text-grey-darkest py-4 px-6 border-b border-grey-light text-center">
                                     {{ formatDate(user.end_date) }}
                                 </td>
                             </tr>
