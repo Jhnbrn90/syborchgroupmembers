@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Mail\MachineIsRunning;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +26,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function() {
+            // find out if the SFMC is running
+            $machine = \App\Status::where('machine', 'SFC-MS')->first();
+
+            if($machine->status == "running") {
+               // get the user's email
+                $email = $machine->user->email;
+                // send the e-mail
+                Mail::to($email)->send(new MachineIsRunning());
+            }
+
+        })->hourly();
     }
 
     /**
